@@ -345,16 +345,16 @@ Detailed medical debt collection module: `w2q32`–`w2q56f` covering insurance, 
 |------|--------|------------|---------|
 | S4W2 | Q25 | `w2q25` | "...paid in four or fewer interest-free installments" |
 | S5W1 | Q69 | `q69` | "...paid in four or fewer interest-free installments" |
-| S5W2 | Q37 | `w2q37` | "...paid in four or fewer interest-free installments" |
-| S6W1 | Q83 | `q83` | "...paid in four or fewer interest-free installments" |
+| S5W2 | Q37 | `w2q55` | "...paid in four or fewer interest-free installments" |
+| S6W1 | Q83 | `q77` | "...paid in four or fewer interest-free installments" |
 
 All use 4-point scale: 1=Never, 2=1-2 times, 3=3-6 times, 4=More than 6 times.
 
 ### BNPL Missed Payment (2 waves)
 | Wave | PDF Q# | CSV Column |
 |------|--------|------------|
-| S5W2 | Q48 | `w2q48` |
-| S6W1 | Q51 | `q51` |
+| S5W2 | Q48 | `w2q30h` |
+| S6W1 | Q51 | `q45h` |
 
 ---
 
@@ -651,8 +651,8 @@ Most variables use these standard codings:
 | HH Composition (q106, q107) | YES | YES | YES | YES |
 | Financial Stress (q12/q45) | q12 | q12 | q12 | q45 |
 | Work Status (q3a/b) | YES | YES | YES | YES |
-| BNPL Frequency | w2q25 | q69 | w2q37 | q83 |
-| BNPL Missed Payment | — | — | w2q48 | q51 |
+| BNPL Frequency | w2q25 | q69 | w2q55 | q77 |
+| BNPL Missed Payment | — | — | w2q30h | q45h |
 | Risk Preference | — | — | — | q123–q125 |
 | Financial Literacy | — | — | — | q1a–q1e |
 | Sports Betting | — | — | — | q117–q122 |

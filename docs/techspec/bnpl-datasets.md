@@ -220,7 +220,7 @@ Waves are merged into a single CSV in **wide format** (one row per respondent), 
 | Prefix | Wave | Example |
 |--------|------|---------|
 | (none) | Wave 1 | `q37`, `q48` |
-| `w2` | Wave 2 | `w2q37`, `w2q48` |
+| `w2` | Wave 2 | `w2q55`, `w2q30h` |
 | `w3` / `w321` | Wave 3 (S1 only) | `w3q*` / `w321*` |
 
 This means a single row contains both W1 and W2 responses for the same respondent, differentiated by column prefix.
@@ -246,8 +246,8 @@ Each data file includes survey weight columns that vary by wave and mode:
 | S4W1 | W1 | Q71 | `q71` |
 | S4W2 | W2 | Q25 | `w2q25` |
 | S5W1 | W1 | Q69 | `q69` |
-| S5W2 | W2 | Q37, Q48 | `w2q37`, `w2q48` |
-| S6W1 | W1 | Q83, Q51 | `q83`, `q51` |
+| S5W2 | W2 | Q37, Q48 | `w2q55`, `w2q30h` |
+| S6W1 | W1 | Q83, Q51 | `q77`, `q45h` |
 
 ### ML implications for cross-sample merging
 
