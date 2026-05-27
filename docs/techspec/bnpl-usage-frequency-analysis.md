@@ -9,9 +9,9 @@ This document defines the technical specification for `notebooks/bnpl-usage-freq
 ### Analysis Scope
 | Dimension | Coverage |
 |-----------|----------|
-| **BNPL adoption trend** | S3W1 (2022) → S3W2 (2023) → S4W1 (2023) → S4W2 (2024) → S5W1 (2024) → S5W2 (2025) → S6W1 (2025) — 7 waves, 3 years |
+| **BNPL adoption trend** | S3W1 (2022) → S3W2 (2023) → S4W2 (2024) → S5W1 (2024) → S5W2 (2025) → S6W1 (2025) — 6 waves, 3 years |
 | **BNPL frequency trend** | S4W2 (2024) → S5W1 (2024) → S5W2 (2025) → S6W1 (2025) — 4 waves, identical wording (for predictive modeling) |
-| **BNPL frequency trend (descriptive)** | S3W2 (2023) → S4W1 (2023) → S4W2 (2024) → S5W1 (2024) → S5W2 (2025) → S6W1 (2025) — 5 waves (older wording noted) |
+| **BNPL frequency trend (descriptive)** | S3W2 (2023) → S4W2 (2024) → S5W1 (2024) → S5W2 (2025) → S6W1 (2025) — 5 waves (older wording noted) |
 | **Missed payment analysis** | S5W2 + S6W1 — 2 waves with BNPL missed-payment checkbox |
 | **Feature selection** | Train set only — weighted statistical screening of covariates (no data leakage) |
 | **Predictive modeling (frequency)** | Hurdle model — Stage 1: BNPL adoption (binary), Stage 2: conditional frequency (multiclass) |
@@ -122,8 +122,8 @@ Merge into three DataFrames:
 
 | DataFrame | Waves | Purpose |
 |-----------|-------|---------|
-| **`df_7wave_adopt`** | S3W1 + S3W2 + S4W1 + S4W2 + S5W1 + S5W2 + S6W1 | **Adoption trend** (7 waves, 3 years: Jan 2022 → Jan 2025) |
-| **`df_5wave_freq`** | S3W2 + S4W1 + S4W2 + S5W1 + S5W2 + S6W1 | **Frequency trend** (5 waves, older wording annotation) |
+| **`df_7wave_adopt`** | S3W1 + S3W2 + S4W2 + S5W1 + S5W2 + S6W1 | **Adoption trend** (6 waves, 3 years: Jan 2022 → Jan 2025; name retains `7wave` for notebook legacy) |
+| **`df_5wave_freq`** | S3W2 + S4W2 + S5W1 + S5W2 + S6W1 | **Frequency trend** (5 waves, older wording annotation) |
 | **`df_4wave_harmonized`** | S4W2 + S5W1 + S5W2 + S6W1 | **Predictive modeling** (identical wording: "four or fewer installments") |
 
 Note: S3W1 only contributes to adoption trend (binary yes/no). It cannot be used for frequency analysis.
@@ -164,13 +164,13 @@ Cleaning decisions:
 
 #### 5.2. Trend Analysis
 
-**5.2.1. BNPL Adoption Over Time (7 waves, 3 years)**
+**5.2.1. BNPL Adoption Over Time (6 waves, 3 years)**
 - Dataset: `df_7wave_adopt`
-- % "Ever used BNPL" plotted across all 7 waves: S3W1 (Jan 2022) through S6W1 (Jan 2025)
+- % "Ever used BNPL" plotted across all 6 waves: S3W1 (Jan 2022) through S6W1 (Jan 2025) [S4W1 excluded — same field period and wording as S3W2]
 - Standalone weights per wave
 - Chart features:
-  - 7 data points with 95% CIs
-  - Year grouping labels (2022: S3W1; 2023: S3W2, S4W1; 2024: S4W2, S5W1; 2025: S5W2, S6W1)
+  - 6 data points with 95% CIs
+  - Year grouping labels (2022: S3W1; 2023: S3W2; 2024: S4W2, S5W1; 2025: S5W2, S6W1)
   - Dotted vertical line at S4W2 marking wording change (*"four installments" → "four or fewer installments"*)
 - Table: adoption rate, sample size (n), and CI per wave
 
@@ -444,6 +444,9 @@ The following findings emerged from EDA and were validated against this techspec
 | **Model performance weaker than expected** | Not in spec | Added §8.1 and §9.1 notes: Stage 1 max ROC-AUC 0.66, Stage 2 fails to beat baseline, only missed payment shows discriminability (ROC-AUC 0.86) |
 | **sklearn version incompatibility** | Not anticipated | Removed `multi_class='multinomial'` from LogisticRegression (deprecated in sklearn ≥1.4) |
 | **Comparison tables not rendering** | Not anticipated | Wrapped `pd.DataFrame({...})` with `display()` calls in code_51, code_57, code_64 |
+| **Epsilon-squared negative for continuous features** | Expected ≥0 | Weighted Kruskal-Wallis implementation produced negative epsilon-squared for FWB (−0.11) and age_bin (−0.02) due to within-rank correction. Effect-size ranking for continuous features is unreliable — rely on p-values and categorical Cramér's V instead. |
+| **FWB p=1.0 in feature screening** | Expected significant | FWB (continuous) returned p=1.0 on weighted Kruskal-Wallis due to the same implementation issue — a false negative. Categorical binning of FWB would recover signal. |
+| **Logistic odds ratios exhibit near-complete separation** | Expected stable ORs | Adoption-stage logistic regression produced odds ratios ~10¹²³ for several features, indicating near-complete separation. Odds ratios are not interpretable — use XGBoost SHAP for variable importance instead. |
 
 ### Implementation Deviations from Techspec (Resolved)
 

@@ -183,9 +183,9 @@ This yields 4 waves across 2024–2025 for trend/panel analysis of BNPL adoption
 
 | Priority | Dataset(s) | Why |
 |---|---|---|
-| **Best** | S5W2 alone | BNPL frequency feature + missed-payment target + richest covariates + most recent (2025) |
-| **Good** | S5W2 + S6W1 (merged) | Larger N, two waves, both variables available |
-| **Trend** | S4W2 + S5W1 + S5W2 + S6W1 | 4 waves with identical frequency question for time-series |
+| **Best** | S5W2 + S6W1 (merged) | Largest N, two waves, BNPL frequency + missed-payment + richest covariates + most recent (2025) |
+| **Good** | S4W2 + S5W1 + S5W2 + S6W1 | 4 waves with identical frequency question for pooled predictive modeling |
+| **Descriptive** | S3W2 + S4W2 + S5W1 + S5W2 + S6W1 | 5 waves for frequency trend (older wording annotated) |
 | **Legacy** | S3W2 + S4W1 | Only frequency, older data (2023), binary-to-ordinal not aligned |
 
 ## Data Files & Structure

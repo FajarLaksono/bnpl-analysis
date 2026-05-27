@@ -174,7 +174,7 @@ S3 uses `q110a–q110f`; S4,S5,S6 use `q105a–q105f`. **0**=Not Selected, **1**
 | `q7` | HH currently has a savings account? | 0/1 | All |
 | `q8` | HH currently has a prepaid card? | 0/1 | All |
 | `q9` | HH currently uses a money order? | 0/1 | All |
-| `q10` | HH currently uses a check-cashing service? | 0/1 | All |
+| `q10` | HH currently uses a check-cashing service? | 0/1 | S3,S4,S5 |
 | `q11` | HH currently uses a payday loan? | 0/1 | All |
 | `q12` | HH currently uses a pawn shop? | 0/1 | All |
 | `q15` | Total money in checking + savings now | Bands | All |
@@ -199,6 +199,7 @@ S3 uses `q110a–q110f`; S4,S5,S6 use `q105a–q105f`. **0**=Not Selected, **1**
 ### S6 Income/Expenses (revised numbering)
 | Column | Description |
 |--------|------------|
+| `q10` | HH total income in past year (11 raw bands); mapped to 5-group `income` | S6 only |
 | `q18a–q18g` | HH currently has: checking, savings, prepaid card, money order, check cashing, payday, pawn? |
 | `q21a–q21f` | HH owes money on: credit card, auto loan, student loan, medical, personal loan, family loan |
 
@@ -280,13 +281,13 @@ Detailed medical debt collection module: `w2q32`–`w2q56f` covering insurance, 
 | `q84` | Expect to pay full balance in next year? | 0=No, 1=Yes | S3,S5,S6 |
 | `q85` | Has credit card autopay? | 0=No, 1=Yes | S3,S5,S6 |
 | `q86` | Credit card autopay amount setting | 1=Minimum, 2=Full statement, 3=Some other | S3,S5,S6 |
-| `w2q27` / `q87` | Past 12 months: incurred late fee on credit card? | 0=No, 1=Yes | S3,S4,S5 / S5,S6 |
+| `w2q27` / `[S5,S6]q87` | Past 12 months: incurred late fee on credit card? | 0=No, 1=Yes | S3,S4,S5 / S5,S6 |
 | `w2q28` / `q88` | Past year: how many times used BNPL / how many late fees? | Frequency bands | S3,S4,S5 / S3,S5,S6 |
 | `w2q29` | Unpaid CC balance after last payment (W2) | 0=No, 1=Yes | S4 |
 | `w2q30` | Has credit card autopay (W2) | 0/1 | S4 |
 | `w2q31` | Credit card autopay amount (W2) | 1=Minimum, 2=Full, 3=Other | S4,S5 |
 | `q80` | Past year: unexpected CC cancellation or limit reduction | 0=No, 1=Yes | S3,S5,S6 |
-| `q87` | How do you think credit score has changed? | 1=Improved, 2=Stayed same, 3=Gotten worse | S3,S4,S5,S6 |
+| `[S4,S5,S6]q87` | How do you think credit score has changed? | 1=Improved, 2=Stayed same, 3=Gotten worse | S4,S5,S6 |
 
 ---
 
@@ -334,7 +335,7 @@ Detailed medical debt collection module: `w2q32`–`w2q56f` covering insurance, 
 | `q84` (S3) / `q77` (S4,S5,S6) | Past year: purchased something using BNPL? | 0=No, 1=Yes | All |
 | `q85` | Past year: how many times used BNPL? | 1=1-2 times, 2=3-6 times, 3=More than 6 times | S3 |
 | `q86` | Total amount of merchandise bought with BNPL | Numeric (topcoded) | S3 |
-| `q87` | Paid interest or late fees for BNPL in past year? | 0=No, 1=Yes | S3 |
+| `[S3]q87` | Paid interest or late fees for BNPL in past year? | 0=No, 1=Yes | S3 |
 | `q88` | Last time incurred BNPL late fee: was it expected? | 0=No/unexpected, 1=Yes/expected | S3 |
 | `q89` | Past 12 months: HH overdrafted or payment turned down? | 1=Yes overdraft, 2=Yes payment turned down | S3 |
 | `w2q27` | Past 12 months: incurred late fee on any credit cards? | 0=No, 1=Yes | S3,S4,S5 |
@@ -385,14 +386,14 @@ Payday loans, pawn shops, auto title loans, and Earned Wage Access (EWA).
 
 | Column | Description | Values | Samples |
 |--------|------------|--------|---------|
-| `q87` / `q89` | Past 12 months: HH overdrafted/payment turned down? | 1=Yes overdraft, 2=Yes payment turned down | S3 / S4,S5,S6 |
+| `[S3]q87` / `q89` | Past 12 months: HH overdrafted/payment turned down? | 1=Yes overdraft, 2=Yes payment turned down | S3 / S4,S5,S6 |
 | `q88` / `q90` | How often did HH overdraft/have payment turned down? | 1=1-3, 2=4-10, 3=10+ | S3,S4,S5,S6 |
 | `q91` | Last time overdrafted: surprised? | 1=Surprised, 2=Thought possible, 3=Expected | S3,S4,S5,S6 |
 | `w2q18` | Past year: number of overdraft fees charged | 1=None, 2=1-3, 3=4-10, 4=10+ | S3,S4,S5 |
 | `w2q19` | Last time: surprised by overdraft? | 1=Surprised, 2=Thought possible, 3=Expected | S3,S4,S5 |
 | `w2q20` | Past year: number of NSF fees | 1=None, 2=1-3, 3=3+ | S3,S4,S5 |
 | `w2q21` | Last time NSF: surprised or expected? | 1=Surprised, 2=Thought possible, 3=Expected | S3,S4,S5 |
-| `q87` (S5,S6) | Past 12 months: overdraft fees | 1=None, 2=1-3, 3=4-10, 4=10+ | S5,S6 |
+| `[S5,S6]q87` | Past 12 months: overdraft fees | 1=None, 2=1-3, 3=4-10, 4=10+ | S5,S6 |
 | `q88` (S5,S6) | Past 12 months: NSF fees | 1=None, 2=1-3, 3=3+ | S5,S6 |
 
 ---

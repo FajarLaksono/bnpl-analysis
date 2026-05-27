@@ -46,7 +46,7 @@ This project analyzes Buy Now Pay Later (BNPL) usage patterns using the CFPB Mak
 
 | DataFrame | Waves | Rows | Purpose |
 |-----------|-------|------|---------|
-| `df_7wave_adopt` | S3W1+S3W2+S4W2+S5W1+S5W2+S6W1 | ~15K | Adoption trend (3 years) |
+| `df_7wave_adopt` | S3W1+S3W2+S4W2+S5W1+S5W2+S6W1 | ~15K | Adoption trend (6 waves, 3 years; name retains `7wave` for notebook legacy) |
 | `df_5wave_freq` | S3W2+S4W2+S5W1+S5W2+S6W1 | ~13K | Frequency trend (older wording annotated) |
 | `df_4wave_harmonized` | S4W2+S5W1+S5W2+S6W1 | ~11K | Predictive modeling (identical wording) |
 | `df_2wave` | S5W2+S6W1 | ~5.7K | Missed payment analysis |

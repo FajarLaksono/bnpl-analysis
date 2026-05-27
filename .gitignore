@@ -1,12 +1,8 @@
 # Environment variables (secrets)
 .env
-sembada-cloud-research-key.json
 credentials.json
 credential.json
 credentials/
-
-# Temporarily
-ClusterData2019_docs
 
 # Data (staging parquet files, large)
 data/
@@ -19,10 +15,6 @@ models/*.csv
 models/
 !models/.gitkeep
 !models/**/.gitkeep
-
-# log files
-catboost_info/
-.coverage
 
 # Python
 __pycache__/
@@ -46,3 +38,4 @@ Thumbs.db
 
 # QA
 .pytest_cache/
+.coverage
