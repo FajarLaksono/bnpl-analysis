@@ -34,7 +34,6 @@ Survey weights used in all descriptive stats and linear models. Cluster-robust S
 │   │   ├── bnpl-feature-dictionary.md         # All 1,073 variables across 23 categories
 │   │   └── bnpl-usage-frequency-analysis.md   # Technical spec
 │   ├── white-paper.md                         # Full technical white paper
-│   └── the_assignment/                        # Course assignment materials
 ├── data/raw/                                  # Raw CSV data from CFPB ZIPs
 ├── requirements.txt
 └── .env                                       # Dataset download URLs (not tracked)
